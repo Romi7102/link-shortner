@@ -17,7 +17,7 @@ formEL.addEventListener("submit", async (event) => {
     const url = formData.get("input");
     formEL.classList.add("was-validated");
     
-    output.value = "Please wait....";
+    output.value = "Please wait...";
     const response = await fetch("/api/shorten", {
         method: "POST",
         headers: {
