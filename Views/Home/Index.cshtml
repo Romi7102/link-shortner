@@ -1,0 +1,82 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+} 
+
+<div style="user-select: none;">
+		<div>
+			<img style="width: 600px; height: 200px" class="mx-auto d-block" src="~/imgs/newlogo.png" />
+		</div>
+
+	<div class="mb-5 mt-5  text-center container-sm ">
+		<form class="needs-validation" id="form">
+			<div class="mb-1 mt-1 input-group">
+				<Span class="input-group-text">Enter Link:</Span>
+				<input name="input" type="url" class="form-control" id="input" placeholder="Example: https://google.com" required >
+				<button class="btn btn-outline-secondary btn-warning" type="submit" id="Submit">Shorten!</button>
+			</div>    
+			<div class="mb-1 mt-1 input-group">
+				<Span class="input-group-text">Shorten Link:</Span>
+				<input type="text" class="form-control" id="output" readonly="readonly" placeholder="Shorten a url to get one..." >
+				<button class="btn btn-outline-secondary btn-warning" type="button" id="Copy">Copy</button>
+			</div>
+		</form>
+	</div>
+
+	<div id="errors" class="text-danger mb-3 card">
+
+	</div>
+
+
+	<div class="container text-center card">
+		<div class="row">
+		<div class="col">
+			<img class="rounded mx-auto d-block" src="~/imgs/icon-like.png">
+			<h3 class="aligncenter">Easy</h3>
+			<p class="aligncenter">LinkShortner is easy and fast, enter the long link to get your shortened link</p>
+		</div>
+		<div class="col">
+			<img src="~/imgs/icon-url.png">
+			<h3 class="aligncenter">Shortened</h3>
+			<p class="aligncenter">Use any link, no matter what size, LinkShortner always shortens</p>
+		</div>
+		<div class="col">
+			<img src="~/imgs/icon-secure.png" />
+			<h3 class="aligncenter">Secure</h3>
+			<p class="aligncenter">It is fast and secure, our service have HTTPS protocol and data encryption</p>
+		</div>
+
+		<div class="row">
+		<div class="col">
+			<img src="~/imgs/icon-statistics.png" />
+			<h3 class="aligncenter">Statistics</h3>
+			<p class="aligncenter">Check the amount of clicks that your shortened URL received</p>
+		</div>
+		<div class="col">
+			<img src="~/imgs/icon-unique.png">
+			<h3 class="aligncenter">Reliable</h3>
+			<p class="aligncenter">All links that try to disseminate spam, viruses and malware are deleted</p>
+		</div>
+		<div class="col">
+			<img class="rounded mx-auto d-block" src="~/imgs/icon-responsive.png">
+			<h3 class="aligncenter">Devices</h3>
+			<p class="aligncenter">Compatible with smartphones, tablets and desktop</p>
+		</div>
+
+		</div>
+		</div>
+	</div>
+
+
+	<div class="mb-5 mt-5  text-left container-sm card">
+		<p>
+			<h1>How to use</h1>
+			LinkShortner is a free service to shorten URLs and create short links
+			Create a premium account to shorten unlimited URLs with more features for your projects <br/>
+			Enter a link and click on shorten! , a short link will be generated for you and can be used anywhere!<br/>
+			<h3 class="mt-3">Enjoy!!!</h3>
+		</p>
+	</div>
+</div>
+@section Scripts{
+		<script src="~/js/Home.js" asp-append-version="true" ></script>
+}
