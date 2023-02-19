@@ -29,8 +29,6 @@ public static class IdentityConfiguration {
             o.Lockout.AllowedForNewUsers = true;
         });
 
-       
-
         return services;
     }
 }
