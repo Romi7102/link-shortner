@@ -20,6 +20,13 @@ namespace LinkShortner {
 
 			builder.Services.AddSingleton(typeof(StringService));
 
+            var configuration = builder.Configuration;
+            builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = configuration["Authentication:Google:ClientId"]; // in user secrets
+                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

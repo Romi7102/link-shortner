@@ -28,6 +28,9 @@ public static class IdentityConfiguration {
             o.Lockout.MaxFailedAccessAttempts = 5;
             o.Lockout.AllowedForNewUsers = true;
         });
+
+       
+
         return services;
     }
 }
