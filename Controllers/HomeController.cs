@@ -11,15 +11,16 @@ namespace LinkShortner.Controllers {
 		private readonly UserManager<IdentityUser> userManager;
 		private readonly SignInManager<IdentityUser> signInManager;
 
-		public HomeController(LinkContext urlContext , ILogger<HomeController> logger , UserManager<IdentityUser> userManager ,
+		public HomeController(LinkContext linkContext , ILogger<HomeController> logger , UserManager<IdentityUser> userManager ,
 			SignInManager<IdentityUser> SignInManager) {
-            this.linkContext = urlContext;
-			_logger = logger;
+            this.linkContext = linkContext;
+			this._logger = logger;
 			this.userManager = userManager;
-			signInManager = SignInManager;
+			this.signInManager = SignInManager;
 		}
 
         public IActionResult Index() {
+            // Use this redirect to not allow to shorten links without an account
 			//if (!signInManager.IsSignedIn(User))
 			//	return Redirect("/Identity/Account/Login");
 			return View();
@@ -27,15 +28,17 @@ namespace LinkShortner.Controllers {
         [HttpGet("s/{code}")]
         public IActionResult GetUrl([FromRoute] string code) {
             var link = linkContext.GetLinkByCode(code);
-            if (link != null) {
-				link.Clicks++;
-				linkContext.Links.Update(link);
-				linkContext.SaveChanges();
-				return RedirectPermanent(link.FullUrl);
-            }
-            else {
+            if (link == null) {
                 return BadRequest();
             }
+
+			link.Clicks++;
+			linkContext.Links.Update(link);
+			linkContext.SaveChanges();
+			return RedirectPermanent(link.FullUrl);
+            
+            
+            
         }
 
         public IActionResult About() {
