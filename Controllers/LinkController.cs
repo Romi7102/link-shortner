@@ -29,9 +29,9 @@ namespace LinkShortner.Controllers {
             bool result = Uri.TryCreate(fullUrl, UriKind.Absolute, out uriResult)
                 && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
-            if (!result) {
+            if (!result) 
                 return BadRequest();
-            }
+            
 
 			var userId = User.Identity.IsAuthenticated ? userManager.GetUserId(User) : null;
             
