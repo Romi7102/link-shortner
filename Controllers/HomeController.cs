@@ -1,5 +1,6 @@
 ﻿using LinkShortner.Context;
 using LinkShortner.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,14 +8,21 @@ namespace LinkShortner.Controllers {
     public class HomeController : Controller {
         private readonly LinkContext linkContext;
 		private readonly ILogger<HomeController> _logger;
+		private readonly UserManager<IdentityUser> userManager;
+		private readonly SignInManager<IdentityUser> signInManager;
 
-        public HomeController(LinkContext urlContext , ILogger<HomeController> logger) {
+		public HomeController(LinkContext urlContext , ILogger<HomeController> logger , UserManager<IdentityUser> userManager ,
+			SignInManager<IdentityUser> SignInManager) {
             this.linkContext = urlContext;
 			_logger = logger;
-        }
+			this.userManager = userManager;
+			signInManager = SignInManager;
+		}
 
         public IActionResult Index() {
-            return View();
+			//if (!signInManager.IsSignedIn(User))
+			//	return Redirect("/Identity/Account/Login");
+			return View();
         }
         [HttpGet("s/{code}")]
         public IActionResult GetUrl([FromRoute] string code) {
@@ -36,7 +44,11 @@ namespace LinkShortner.Controllers {
         }
         [HttpGet("links")]
         public IActionResult Links() {
-            var ret = linkContext.Links.ToList();
+            if (!signInManager.IsSignedIn(User))
+                return Redirect("/Identity/Account/Login");
+
+			var userId = User.Identity.IsAuthenticated ? userManager.GetUserId(User) : null;
+			var ret = linkContext.Links.Where(link => link.UserId == userId).ToList();
             return View(ret);
         }
         

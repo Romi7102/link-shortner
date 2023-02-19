@@ -10,10 +10,15 @@ namespace LinkShortner {
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<LinkContext>(
-                o => o.UseSqlServer(builder.Configuration.GetConnectionString("LinkDB")));
+            //builder.Services.AddDbContext<LinkContext>(
+            //    o => o.UseSqlServer(builder.Configuration.GetConnectionString("LinkDB")));
 
-            builder.Services.AddSingleton(typeof(StringService));
+			var connectionString = builder.Configuration.GetConnectionString("LinkDB")
+				?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+			builder.Services.ConfigureIdentity(connectionString);
+
+			builder.Services.AddSingleton(typeof(StringService));
 
             var app = builder.Build();
 
@@ -35,7 +40,9 @@ namespace LinkShortner {
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app.Run();
+			app.MapRazorPages();
+
+			app.Run();
         }
     }
 }

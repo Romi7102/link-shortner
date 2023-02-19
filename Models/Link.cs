@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace LinkShortner.Models {
@@ -8,6 +9,8 @@ namespace LinkShortner.Models {
         [Required]
         public string FullUrl { get; set; }
         public int Clicks { get; set; } = 0;
+
+        public string UserId { get; set; }
         public DateTime? Created { get; set; } = DateTime.UtcNow;
 
     }

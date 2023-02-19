@@ -1,8 +1,9 @@
 ﻿using LinkShortner.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkShortner.Context {
-    public class LinkContext : DbContext {
+    public class LinkContext : IdentityDbContext {
         public LinkContext(DbContextOptions options) : base(options) {
         }
         public virtual DbSet<Link> Links{ get; set; }

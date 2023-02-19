@@ -24,7 +24,7 @@ formEL.addEventListener("submit", async (event) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(url),
+        body: JSON.stringify(url)
     });
 
     if (response.status === 400) {
