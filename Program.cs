@@ -25,6 +25,11 @@ namespace LinkShortner {
             {
                 googleOptions.ClientId = configuration["Authentication:Google:ClientId"]; // in user secrets
                 googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            }).AddFacebook(options =>
+            {
+                options.AppId = configuration["Authentication:Facebook:AppId"];
+                options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+                options.AccessDeniedPath = "/AccessDeniedPathInfo";
             });
 
             var app = builder.Build();
