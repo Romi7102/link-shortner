@@ -16,7 +16,7 @@ namespace LinkShortner {
 			var connectionString = builder.Configuration.GetConnectionString("LinkDB")
 				?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-			builder.Services.ConfigureIdentity(connectionString);
+			builder.Services.ConfigureIdentity(connectionString); // Extention
 
 			builder.Services.AddSingleton(typeof(StringService));
 
