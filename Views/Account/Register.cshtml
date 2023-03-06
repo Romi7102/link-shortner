@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model RegisterModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	var Errors = (List<IdentityError>)TempData["RegisterErrors"];
+}
+
+
+<div>
+	<form method="post" asp-controller="Account" asp-action="Register">
+		<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">First Name:</Span>
+			<input class="form-control mr-3" asp-for="User.FirstName">
+			<Span class="input-group-text">Last Name:</Span>
+			<input class="form-control" asp-for="User.LastName">
+			<span class="text-danger" asp-validation-for="User.FirstName"></span>
+			<span class="text-danger" asp-validation-for="User.LastName"></span>
+		</div>
+
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">User name:</Span>
+			<input class="form-control" asp-for="User.UserName">
+			<span class="text-danger" asp-validation-for="User.UserName"></span>
+		</div>
+
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">Password:</Span>
+			<input class="form-control" asp-for="Password">
+			<span class="text-danger" asp-validation-for="Password"></span>
+		</div>
+
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">Confirm Password:</Span>
+			<input class="form-control" asp-for="ConfirmPassword">
+			<span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+		</div>
+
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">Email:</Span>
+			<input type="email" class="form-control" asp-for="User.Email">
+			<span class="text-danger" asp-validation-for="User.Email"></span>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Register</button>
+
+	</form>
+	@if (Errors != null && Errors.Count > 0) {
+		<div>
+			<ul>
+				@foreach (var item in Errors) {
+					<li class="text-danger">
+						@item.Description
+					</li>
+				}
+			</ul>
+		</div>
+		Errors = null;
+	}
+
+</div>

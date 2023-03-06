@@ -1,0 +1,19 @@
+﻿@model LoginModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div>
+    <form method="post" asp-action="Login" asp-controller="Account">
+        <div class="mb-1 mt-1 input-group">
+            <Span class="input-group-text">User Name:</Span>
+            <input class="form-control" asp-for="UserName">
+        </div>
+        <div class="mb-1 mt-1 input-group">
+            <Span class="input-group-text">Password</Span>
+            <input class="form-control" asp-for="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>

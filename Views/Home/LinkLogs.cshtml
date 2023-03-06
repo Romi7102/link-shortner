@@ -1,0 +1,28 @@
+﻿@model Link
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	int i = 1;
+}
+<h2 class="text-center">@Model.FullUrl</h2>
+
+<table class="table table-bordered border-dark">
+	<thead class="text-center">
+		<tr class="table-dark">
+			<th>#</th>
+			<th>Remote Ip</th>
+			<th>Date</th>
+		</tr>
+		@foreach (var log in Model.Logs) {
+			<tr>
+				<td>@(i++)</td>
+				<td>@log.Ip</td>
+				<td>@log.Date.ToLocalTime()</td>
+			</tr>
+		}
+	</thead>
+	<tbody class="text-center">
+	</tbody>
+</table>
+

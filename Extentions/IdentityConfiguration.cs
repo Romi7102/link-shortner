@@ -1,4 +1,5 @@
 using LinkShortner.Context;
+using LinkShortner.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +12,12 @@ public static class IdentityConfiguration {
 
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        services.AddDefaultIdentity<IdentityUser>(options =>
-            options.SignIn.RequireConfirmedAccount = true
-        )
-            .AddEntityFrameworkStores<LinkContext>();
+        services.AddIdentity<UserModel , IdentityRole>()
+			.AddEntityFrameworkStores<LinkContext>();
 
+        services.ConfigureApplicationCookie(options => {
+            options.LoginPath = "/Account/Login";
+        });
         services.Configure<IdentityOptions>(o => {
             o.Password.RequiredUniqueChars = 0;
             o.Password.RequireUppercase = false;

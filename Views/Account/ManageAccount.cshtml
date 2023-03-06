@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<UserModel> UserManager
+@model ManageModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	var currentUser = await UserManager.GetUserAsync(User);
+}
+<div>
+	<form method="post" asp-action="UpdateDetails" asp-controller="Account">
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">First Name:</Span>
+			<input asp-for="FirstName" class="form-control mr-3" value="@currentUser.FirstName">
+			<span asp-validation-for="FirstName"></span>
+		</div>
+
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">Last Name:</Span>
+			<input asp-for="LastName" class="form-control mr-3" value="@currentUser.LastName">
+			<span asp-validation-for="LastName"></span>
+		</div>
+
+		<div class="mb-1 mt-1 input-group">
+			<Span class="input-group-text">Email:</Span>
+			<input asp-for="Email" class="form-control mr-3" value="@currentUser.Email">
+			<span asp-validation-for="Email"></span>
+		</div>
+		<button type="submit" class="btn btn-warning">Update</button>
+	</form>
+
+	<a class="btn btn-link" asp-action="UpdatePassword" asp-controller="Account">Change Password</a>
+	
+
+</div>

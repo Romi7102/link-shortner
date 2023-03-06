@@ -12,6 +12,7 @@ namespace LinkShortner.Models {
 
         public string UserId { get; set; }
         public DateTime? Created { get; set; } = DateTime.UtcNow;
+        public virtual List<LinkLog> Logs { get; set; }
 
     }
 }

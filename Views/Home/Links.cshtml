@@ -12,6 +12,7 @@
 				<th>Link</th>
 				<th>Shortened Link</th>
 				<th>Clicks Count</th>
+				<th>Logs</th>
 			</tr>
 		</thead>
 		<tbody class="text-center">
@@ -19,16 +20,19 @@
 				int i = 0;
 			}
 			@foreach (var item in Model) {
-					<tr>
-						<td>@(++i)</td>
-						<td>@item.FullUrl</td>
-						<td>
-							<a href="@item.Href(Context)" target="blank" class="nav-link">
+				<tr>
+					<td>@(++i)</td>
+					<td>@item.FullUrl</td>
+					<td>
+						<a href="@item.Href(Context)" target="blank" class="nav-link">
 							@item.Href(Context)
-							</a>
-						</td>
-						<td>@item.Clicks</td>
-					</tr>
+						</a>
+					</td>
+					<td>@item.Clicks</td>
+					<td>
+						<a href="/links/@item.Code" class="btn btn-link">Logs</a>
+					</td>
+				</tr>
 			}
 		</tbody>
 
@@ -38,6 +42,7 @@
 				<td>Full Url</td>
 				<td>The Shortened link provided by the service</td>
 				<td>The Amount of people who opened the shortened link</td>
+				<td>See who clicked on the link and when</td>
 			</tr>
 		</tfoot>
 

@@ -7,7 +7,7 @@ namespace LinkShortner {
         public static void Main(string[] args) {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+
             builder.Services.AddControllersWithViews();
 
             //builder.Services.AddDbContext<LinkContext>(
@@ -20,17 +20,17 @@ namespace LinkShortner {
 
 			builder.Services.AddSingleton(typeof(StringService));
 
-            var configuration = builder.Configuration;
-            builder.Services.AddAuthentication().AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = configuration["Authentication:Google:ClientId"]; // in user secrets
-                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-            }).AddFacebook(options =>
-            {
-                options.AppId = configuration["Authentication:Facebook:AppId"];
-                options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
-                options.AccessDeniedPath = "/AccessDeniedPathInfo";
-            });
+            //var configuration = builder.Configuration;
+            //builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = configuration["Authentication:Google:ClientId"]; // in user secrets
+            //    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            //}).AddFacebook(options =>
+            //{
+            //    options.AppId = configuration["Authentication:Facebook:AppId"];
+            //    options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+            //    options.AccessDeniedPath = "/AccessDeniedPathInfo";
+            //});
 
             var app = builder.Build();
 
@@ -52,7 +52,6 @@ namespace LinkShortner {
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-			app.MapRazorPages();
 
 			app.Run();
         }
