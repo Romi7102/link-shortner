@@ -19,6 +19,7 @@ namespace LinkShortner {
 			builder.Services.ConfigureIdentity(connectionString); // Extention
 
 			builder.Services.AddSingleton(typeof(StringService));
+            builder.Services.AddSingleton(typeof(EmailService));
 
             //var configuration = builder.Configuration;
             //builder.Services.AddAuthentication().AddGoogle(googleOptions =>

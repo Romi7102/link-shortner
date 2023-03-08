@@ -8,6 +8,8 @@
 }
 
 
+<h1 class="text-center fw-bold">Register</h1>
+<p class="text-center mb-5">please enter the information in order to sign up to our website</p>
 <div>
 	<form method="post" asp-controller="Account" asp-action="Register">
 		<div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -16,37 +18,47 @@
 			<input class="form-control mr-3" asp-for="User.FirstName">
 			<Span class="input-group-text">Last Name:</Span>
 			<input class="form-control" asp-for="User.LastName">
-			<span class="text-danger" asp-validation-for="User.FirstName"></span>
-			<span class="text-danger" asp-validation-for="User.LastName"></span>
+			@*<span class="text-danger" asp-validation-for="User.FirstName"></span>
+			<span class="text-danger" asp-validation-for="User.LastName"></span>*@
 		</div>
 
 		<div class="mb-1 mt-1 input-group">
 			<Span class="input-group-text">User name:</Span>
 			<input class="form-control" asp-for="User.UserName">
-			<span class="text-danger" asp-validation-for="User.UserName"></span>
+			@*<span class="text-danger" asp-validation-for="User.UserName"></span>*@
 		</div>
 
 		<div class="mb-1 mt-1 input-group">
 			<Span class="input-group-text">Password:</Span>
 			<input class="form-control" asp-for="Password">
-			<span class="text-danger" asp-validation-for="Password"></span>
+			@*<span class="text-danger" asp-validation-for="Password"></span>*@
 		</div>
 
 		<div class="mb-1 mt-1 input-group">
 			<Span class="input-group-text">Confirm Password:</Span>
 			<input class="form-control" asp-for="ConfirmPassword">
-			<span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+			@*<span class="text-danger" asp-validation-for="ConfirmPassword"></span>*@
 		</div>
 
 		<div class="mb-1 mt-1 input-group">
 			<Span class="input-group-text">Email:</Span>
-			<input type="email" class="form-control" asp-for="User.Email">
-			<span class="text-danger" asp-validation-for="User.Email"></span>
+			<input type="email" class="form-control" asp-for="User.Email" >
+			@*<span class="text-danger" asp-validation-for="User.Email"></span>*@
 		</div>
-
+		@Html.ValidationSummary("" , new {@class = "text-danger"})
 		<button type="submit" class="btn btn-primary">Register</button>
 
 	</form>
+	@if(TempData["Email"] != null) {
+		<div>
+			<ul>
+				<li class="text-danger">
+					Please enter a valid email address
+				</li>
+			</ul>
+		</div>
+		TempData["Email"] = null;
+	}
 	@if (Errors != null && Errors.Count > 0) {
 		<div>
 			<ul>

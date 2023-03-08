@@ -1,4 +1,5 @@
 ﻿using LinkShortner.Models;
+using LinkShortner.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,11 +8,17 @@ namespace LinkShortner.Controllers {
 	public class AccountController : Controller {
 		private readonly UserManager<UserModel> userManager;
 		private readonly SignInManager<UserModel> signInManager;
+		private readonly EmailService emailService;
+
 		//private readonly RoleManager<IdentityRole> roleManager;
 
-		public AccountController(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager/*, RoleManager<IdentityRole> roleManager*/) {
+		public AccountController(UserManager<UserModel> userManager,
+			SignInManager<UserModel> signInManager,
+			EmailService emailService 
+			/*,RoleManager<IdentityRole> roleManager*/) {
 			this.userManager = userManager;
 			this.signInManager = signInManager;
+			this.emailService = emailService;
 			//this.roleManager = roleManager;
 		}
 		[HttpGet]
@@ -38,6 +45,11 @@ namespace LinkShortner.Controllers {
 			if (!ModelState.IsValid)
 				return View();
 
+
+			if(model.User.Email == null || !emailService.IsValid(model.User.Email)) {
+				TempData["Email"] = false;
+				return View();
+			}
 
 			var result = await userManager.CreateAsync(model.User, model.Password);
 			if (!result.Succeeded) {
