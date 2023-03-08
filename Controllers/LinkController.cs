@@ -16,11 +16,13 @@ namespace LinkShortner.Controllers {
 		private readonly LinkContext urlContext;
 		private readonly StringService stringService;
 		private readonly UserManager<UserModel> userManager;
+		private readonly SignInManager<UserModel> signInManager;
 
-		public LinkController(LinkContext urlContext, StringService stringService, UserManager<UserModel> userManager) {
+		public LinkController(LinkContext urlContext, StringService stringService, UserManager<UserModel> userManager , SignInManager<UserModel> signInManager) {
 			this.urlContext = urlContext;
 			this.stringService = stringService;
 			this.userManager = userManager;
+			this.signInManager = signInManager;
 		}
 
 		[HttpPost("shorten")]
@@ -33,7 +35,7 @@ namespace LinkShortner.Controllers {
 				return BadRequest();
 
 
-			var userId = User.Identity.IsAuthenticated ? userManager.GetUserId(User) : null;
+			var userId = signInManager.IsSignedIn(User) ? userManager.GetUserId(User) : null;
 
 			var tempLink = urlContext.GetUrlByFullUrl(fullUrl);
 
